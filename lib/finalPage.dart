@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class FinalPage extends StatefulWidget {
   const FinalPage({super.key});
@@ -9,17 +10,17 @@ class FinalPage extends StatefulWidget {
 }
 
 class _FinalPageState extends State<FinalPage> {
-  Timer? timer;
-  static const maxSeconds = 5;
+  Timer? timer, millisecondsTimer;
+  static const maxSeconds = 4;
   int seconds = maxSeconds;
 
   @override
   void initState() {
     super.initState();
-    startTimer();
+    startTimerSeconds();
   }
 
-  void startTimer() {
+  void startTimerSeconds() {
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
         seconds--;
@@ -39,24 +40,19 @@ class _FinalPageState extends State<FinalPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Votul tau a fost inregistrat cu succes!"),
-            const SizedBox(height: 20),
             SizedBox(
-              height: 125,
-              width: 125,
-              child: Stack(fit: StackFit.expand, children: [
-                CircularProgressIndicator(
-                  value: seconds / maxSeconds,
-                  strokeWidth: 12,
-                  valueColor: const AlwaysStoppedAnimation(Colors.grey),
-                  backgroundColor: Colors.green,
-                ),
-                Center(
-                  child: Text("$seconds",
-                      style:
-                          const TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-                ),
-              ]),
+                height: 250,
+                width: 250,
+                child: Lottie.asset('assets/Confirmed.json',
+                    repeat: false, reverse: true)),
+            const SizedBox(height: 70),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                "Votul tău a fost înregistrat cu succes!",
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),
